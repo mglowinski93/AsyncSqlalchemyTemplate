@@ -1,0 +1,40 @@
+version: "3.9"
+
+networks:
+  async-sqlalchemy-template:
+
+volumes:
+  async-sqlalchemy-template-backend-cache:
+  async-sqlalchemy-template-db:
+
+services:
+  async-sqlalchemy-template-db:
+    restart: "no"
+    image: "postgres:15-alpine"
+    container_name: async-sqlalchemy-template-db-development
+    networks:
+      async-sqlalchemy-template:
+    volumes:
+      - "async-sqlalchemy-template-db:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_PASSWORD: "async_sqlalchemy_template_password"
+      POSTGRES_USER: "async_sqlalchemy_template_user"
+      POSTGRES_DB: "async_sqlalchemy_template"
+
+  async-sqlalchemy-template-backend:
+    restart: "no"
+    build:
+      context: ../../backend/
+      dockerfile: ../docker/development/backend/Dockerfile
+    container_name: async-sqlalchemy-template-backend-development
+    depends_on:
+      - async-sqlalchemy-template-db
+    networks:
+      async-sqlalchemy-template:
+    volumes:
+      - "../../backend/:/app/"
+      - "./backend/run-development.sh:/tools/run-development.sh"
+      - "./backend/requirements.txt:/requirements/development.txt"
+      - "async-sqlalchemy-template-backend-cache:/root/.cache/pip"
+    environment:
+      DATABASE_URL: "postgresql+asyncpg://async_sqlalchemy_template_user:async_sqlalchemy_template_password@async-sqlalchemy-template-db:5432/async_sqlalchemy_template"
