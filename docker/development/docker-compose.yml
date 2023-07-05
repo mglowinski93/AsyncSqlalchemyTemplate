@@ -33,8 +33,13 @@ services:
       async-sqlalchemy-template:
     volumes:
       - "../../backend/:/app/"
+      - "../general_tools/wait-for:/tools/wait-for"
       - "./backend/run-development.sh:/tools/run-development.sh"
       - "./backend/requirements.txt:/requirements/development.txt"
       - "async-sqlalchemy-template-backend-cache:/root/.cache/pip"
     environment:
-      DATABASE_URL: "postgresql+asyncpg://async_sqlalchemy_template_user:async_sqlalchemy_template_password@async-sqlalchemy-template-db:5432/async_sqlalchemy_template"
+      DATABASE_HOST: "async-sqlalchemy-template-db"
+      DATABASE_PORT: 5432
+      DATABASE_NAME: "async_sqlalchemy_template"
+      DATABASE_USER: "async_sqlalchemy_template_user"
+      DATABASE_PASSWORD: "async_sqlalchemy_template_password"
