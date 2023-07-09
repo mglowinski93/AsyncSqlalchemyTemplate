@@ -11,11 +11,9 @@ services:
   async-sqlalchemy-template-db:
     restart: "no"
     image: "postgres:15-alpine"
-    container_name: async-sqlalchemy-template-db-development
+    container_name: async-sqlalchemy-template-db-tests
     networks:
       async-sqlalchemy-template:
-    volumes:
-      - "async-sqlalchemy-template-db:/var/lib/postgresql/data"
     environment:
       POSTGRES_PASSWORD: "async_sqlalchemy_template_password"
       POSTGRES_USER: "async_sqlalchemy_template_user"
@@ -25,8 +23,8 @@ services:
     restart: "no"
     build:
       context: ../../backend/
-      dockerfile: ../docker/development/backend/Dockerfile
-    container_name: async-sqlalchemy-template-backend-development
+      dockerfile: ../docker/tests/backend/Dockerfile
+    container_name: async-sqlalchemy-template-backend-tests
     depends_on:
       - async-sqlalchemy-template-db
     networks:
@@ -34,8 +32,8 @@ services:
     volumes:
       - "../../backend/:/app/"
       - "../general_tools/wait-for:/tools/wait-for"
-      - "./backend/run-development.sh:/tools/run-development.sh"
-      - "./backend/requirements.txt:/requirements/development.txt"
+      - "./backend/run-tests.sh:/tools/run-tests.sh"
+      - "./backend/requirements.txt:/requirements/tests.txt"
       - "async-sqlalchemy-template-backend-cache:/root/.cache/pip"
     environment:
       DATABASE_HOST: "async-sqlalchemy-template-db"

@@ -9,4 +9,4 @@ RUN apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-CMD ["/tools/run-development.sh"]
+CMD ["/tools/run-tests.sh"]

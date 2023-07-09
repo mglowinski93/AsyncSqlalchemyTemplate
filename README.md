@@ -12,8 +12,8 @@ present on the host system:
 * `docker` (version 20.10.0+)
 * `docker-compose` (version 1.27.0+)
 
-## Development environment
+## Tests environment
 
-To start development environment:
-1. Go into `docker/development` folder.
-2. Execute `docker-compose up`.
+To run tests:
+1. Go into `docker/tests` folder.
+2. Execute `docker-compose up --abort-on-container-exit`.

@@ -7,7 +7,7 @@ from .exceptions import FailedToSaveTemplate, TemplateDoesntExist
 from .mappers import map_template_db_to_dto, map_template_dto_to_db
 
 
-async def save(template: TemplateDto):
+async def save_template(template: TemplateDto):
     async with get_async_session() as async_session:
         async_session.add(map_template_dto_to_db(template))
         try:
@@ -16,7 +16,7 @@ async def save(template: TemplateDto):
             raise FailedToSaveTemplate(message=str(err)) from err
 
 
-async def get(template_id: int) -> TemplateDto:
+async def get_template(template_id: int) -> TemplateDto:
     async with get_async_session() as async_session:
         try:
             return map_template_db_to_dto(

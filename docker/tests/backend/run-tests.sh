@@ -3,7 +3,7 @@ set -e
 
 # Install python packages.
 python -m pip install --upgrade --user --disable-pip-version-check pip
-pip install -r /requirements/development.txt
+pip install -r /requirements/tests.txt
 
 # Wait for the database to be ready.
 /tools/wait-for "${DATABASE_HOST}":"${DATABASE_PORT}" -t 60
@@ -19,4 +19,4 @@ alembic upgrade head
 cd ../
 
 # Run the application.
-python main.py
+pytest

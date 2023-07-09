@@ -1,3 +1,6 @@
 alembic==1.11.*
 sqlalchemy[asyncio]==2.0.*
 asyncpg==0.27.*
+pytest==7.4.*
+pytest-asyncio==0.21.*
+faker==18.13.*
