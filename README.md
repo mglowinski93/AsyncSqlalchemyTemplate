@@ -21,3 +21,7 @@ To run tests:
   ```bash
   docker compose up --abort-on-container-exit
   ```
+
+## Working with repository
+
+1. `backend` folder must be marked as `Sources Root` in `IDE` to make imports work
