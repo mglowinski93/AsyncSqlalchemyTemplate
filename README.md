@@ -9,11 +9,15 @@ usage.
 Running of this project locally requires the following tools to be
 present on the host system:
 
-* `docker` (version 20.10.0+)
-* `docker-compose` (version 1.27.0+)
+* `docker` (version 23.05.0+)
+* `docker compose` (version 2.21.0+)
 
 ## Tests environment
 
 To run tests:
-1. Go into `docker/tests` folder.
-2. Execute `docker-compose up --abort-on-container-exit`.
+1. Go into `docker/tests/` folder
+2. Execute
+
+  ```bash
+  docker compose up --abort-on-container-exit
+  ```
