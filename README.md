@@ -1,4 +1,5 @@
 # AsyncSqlalchemyTemplate
+
 Template for
 [asynchronous](https://docs.python.org/3/library/asyncio.html)
 [SqlAlchemy](https://docs.sqlalchemy.org/en/20/)

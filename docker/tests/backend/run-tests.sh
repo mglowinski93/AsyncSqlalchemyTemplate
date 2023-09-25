@@ -18,5 +18,5 @@ cd ./persistence_layer
 alembic upgrade head
 cd ../
 
-# Run the application.
+# Run the tests.
 pytest
