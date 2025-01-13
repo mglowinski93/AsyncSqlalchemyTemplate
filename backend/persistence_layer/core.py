@@ -16,6 +16,28 @@ engine = create_async_engine(
 )
 
 
+"""
+In an asynchronous application, implicit database activity cannot occur.
+To address this, there is a need to set `expire_on_commit=False` on the `async_sessionmaker`
+or use `AsyncAttrs` in the base class.
+
+By default, SQLAlchemy attempts to refresh model objects from the database
+when their attributes are accessed after a transaction is committed. 
+
+To prevent issues during this process, one of the following solutions is necessary:
+1) Setting `expire_on_commit` to False:
+This prevents SQLAlchemy from automatically refreshing the object from the database after the transaction is committed.
+Manual refreshes must be performed when needed.
+2) Using `AsyncAttrs`: This approach awaits querying the database until the object's attributes are accessed,
+ensuring compatibility with asynchronous workflows.
+
+Choose the option that best suits your application's requirements to maintain proper behavior in an asynchronous context.
+
+More details can be found here:
+https://github.com/sqlalchemy/sqlalchemy/discussions/11495.
+"""
+
+
 @asynccontextmanager
 async def get_async_session():
     async with async_sessionmaker(
